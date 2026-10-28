@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meilis | 3D & Technical Artist Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0b0d12;
+            --card-bg: rgba(22, 27, 38, 0.7);
+            --accent-cyan: #00f2fe;
+            --accent-purple: #9d4edd;
+            --text-main: #f0f3f8;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 242, 254, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        canvas#bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            backdrop-filter: blur(12px);
+            background: rgba(11, 13, 18, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+        }
+
+        .hero {
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+        }
+
+        section {
+            padding: 5rem 10%;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-cyan);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            section { padding: 3rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <div class="logo">MEILIS</div>
+        <nav>
+            <a href="#about">Обо мне</a>
+            <a href="#skills">Навыки</a>
+            <a href="#projects">Проекты</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>3D & Technical Artist</h1>
+            <p>Создание optimized game assets, пайплайны моделирования, UV-развертка, текстурирование и автоматизация сценариев.</p>
+            <a href="#projects" class="btn">Смотреть работы</a>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p>Привет! Я 3D-художник и технический специалист. Специализируюсь на создании высокодетализированных High-Poly и оптимизированных Low-Poly моделей, запекании карт, текстурировании в Substance Painter, а также на разработке скриптов и инструментов для автоматизации пайплайнов в Blender и 3ds Max.</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Навыки и софт</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>3D Modeling & Sculpting</h3>
+                    <p>High-poly / Low-poly моделирование, ZBrush, Blender, 3ds Max, оптимизация геометрии и топология под игровые движки.</p>
+                </div>
+                <div class="card">
+                    <h3>Texturing & Baking</h3>
+                    <p>Substance 3D Painter, Marmoset Toolbag, запекание Normal/AO карт, PBR текстурирование и работа с Texel Density.</p>
+                </div>
+                <div class="card">
+                    <h3>Pipeline & Scripting</h3>
+                    <p>Разработка пользовательских скриптов и аддонов на Python и PySide/Qt для автоматизации рутинных задач 3D-пайплайна.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Проекты</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Game Props & Assets</h3>
+                    <p>Набор игровой атрибутики с полной PBR-текстуризацией и готовым LOD-пакетом.</p>
+                </div>
+                <div class="card">
+                    <h3>Environment Art</h3>
+                    <p>Модульные элементы окружения, настроенные материалы и оптический лод под игровые движки.</p>
+                </div>
+                <div class="card">
+                    <h3>Custom Python Plugins</h3>
+                    <p>Плагины и радиальные меню (Pie Menus) для ускорения работы в 3D-редакторах.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Meilis | Built with GitHub Pages</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Анимированный 3D-фон на Three.js
+        const canvas = document.getElementById('bg-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Геометрия узлов/частиц
+        const geometry = new THREE.IcosahedronGeometry(1.2, 1);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x00f2fe,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.15
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        camera.position.z = 3;
+
+        // Движение за мышью
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
+        });
+
+        // Анимация
+        function animate() {
+            requestAnimationFrame(animate);
+
+            mesh.rotation.x += 0.002;
+            mesh.rotation.y += 0.003;
+
+            mesh.position.x += (mouseX - mesh.position.x) * 0.05;
+            mesh.position.y += (-mouseY - mesh.position.y) * 0.05;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
