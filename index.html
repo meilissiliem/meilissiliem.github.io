@@ -350,8 +350,8 @@
 
             // Плавный поворот камеры от мыши
             scene.rotation.y += 1;
-            scene.rotation.x += (mouseY * 0.5 - scene.rotation.x) * 5;
-            scene.rotation.y += (mouseX * 0.5 - scene.rotation.y) * 5;
+            scene.rotation.x += (mouseY * 0.5 - scene.rotation.x) * 2;
+            scene.rotation.y += (mouseX * 0.5 - scene.rotation.y) * 2;
 
             renderer.render(scene, camera);
         }
