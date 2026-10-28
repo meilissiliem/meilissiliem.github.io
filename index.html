@@ -349,7 +349,7 @@
             linesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
 
             // Плавный поворот камеры от мыши
-            scene.rotation.y += 0.005;
+            scene.rotation.y += 0.01;
             scene.rotation.x += (mouseY * 0.5 - scene.rotation.x) * 0.05;
             scene.rotation.y += (mouseX * 0.5 - scene.rotation.y) * 0.05;
 
