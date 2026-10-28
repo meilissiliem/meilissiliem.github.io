@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-color: #0b0d12;
-            --card-bg: rgba(22, 27, 38, 0.7);
+            --card-bg: rgba(22, 27, 38, 0.75);
             --accent-cyan: #00f2fe;
             --accent-purple: #9d4edd;
             --text-main: #f0f3f8;
@@ -35,6 +35,7 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
+            pointer-events: none;
         }
 
         header {
@@ -250,7 +251,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Анимированный 3D-фон на Three.js
+        // Анимированное облако частиц с динамо-связями
         const canvas = document.getElementById('bg-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -259,21 +260,48 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Геометрия узлов/частиц
-        const geometry = new THREE.IcosahedronGeometry(1.2, 1);
-        const material = new THREE.MeshBasicMaterial({
+        const particleCount = 120;
+        const maxDistance = 2.2;
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = [];
+
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 12;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+
+            velocities.push({
+                x: (Math.random() - 0.5) * 0.008,
+                y: (Math.random() - 0.5) * 0.008,
+                z: (Math.random() - 0.5) * 0.008
+            });
+        }
+
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
             color: 0x00f2fe,
-            wireframe: true,
+            size: 0.06,
             transparent: true,
-            opacity: 0.15
+            opacity: 0.8
         });
 
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
+        const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particleSystem);
 
-        camera.position.z = 3;
+        // Геометрия для динамических соединительных линий
+        const linesGeometry = new THREE.BufferGeometry();
+        const linesMaterial = new THREE.LineBasicMaterial({
+            color: 0x00f2fe,
+            transparent: true,
+            opacity: 0.2
+        });
+        const linesMesh = new THREE.LineSegments(linesGeometry, linesMaterial);
+        scene.add(linesMesh);
 
-        // Движение за мышью
+        camera.position.z = 6;
+
         let mouseX = 0;
         let mouseY = 0;
 
@@ -282,15 +310,48 @@
             mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
         });
 
-        // Анимация
         function animate() {
             requestAnimationFrame(animate);
 
-            mesh.rotation.x += 0.002;
-            mesh.rotation.y += 0.003;
+            const posArr = particlesGeometry.attributes.position.array;
 
-            mesh.position.x += (mouseX - mesh.position.x) * 0.05;
-            mesh.position.y += (-mouseY - mesh.position.y) * 0.05;
+            // Обновление позиций частиц
+            for (let i = 0; i < particleCount; i++) {
+                posArr[i * 3] += velocities[i].x;
+                posArr[i * 3 + 1] += velocities[i].y;
+                posArr[i * 3 + 2] += velocities[i].z;
+
+                // Границы области
+                if (Math.abs(posArr[i * 3]) > 6) velocities[i].x *= -1;
+                if (Math.abs(posArr[i * 3 + 1]) > 6) velocities[i].y *= -1;
+                if (Math.abs(posArr[i * 3 + 2]) > 6) velocities[i].z *= -1;
+            }
+            particlesGeometry.attributes.position.needsUpdate = true;
+
+            // Расчет соединительных линий между близкими точками
+            const linePositions = [];
+            for (let i = 0; i < particleCount; i++) {
+                for (let j = i + 1; j < particleCount; j++) {
+                    const dx = posArr[i * 3] - posArr[j * 3];
+                    const dy = posArr[i * 3 + 1] - posArr[j * 3 + 1];
+                    const dz = posArr[i * 3 + 2] - posArr[j * 3 + 2];
+                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                    if (dist < maxDistance) {
+                        linePositions.push(
+                            posArr[i * 3], posArr[i * 3 + 1], posArr[i * 3 + 2],
+                            posArr[j * 3], posArr[j * 3 + 1], posArr[j * 3 + 2]
+                        );
+                    }
+                }
+            }
+
+            linesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+
+            // Плавный поворот камеры от мыши
+            scene.rotation.y += 0.001;
+            scene.rotation.x += (mouseY * 0.5 - scene.rotation.x) * 0.05;
+            scene.rotation.y += (mouseX * 0.5 - scene.rotation.y) * 0.05;
 
             renderer.render(scene, camera);
         }
