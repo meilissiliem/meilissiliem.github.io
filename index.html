@@ -17,16 +17,40 @@
             --header-bg: rgba(11, 13, 18, 0.6);
         }
 
-        /* Тема Summer (Тёплая) */
-        [data-theme="summer"] {
-            --bg-color: #120c08;
-            --card-bg: rgba(38, 26, 20, 0.75);
+        /* Тема Summer 1: Закат (Sunset) */
+        [data-theme="summer-sunset"] {
+            --bg-color: #1a0b16;
+            --card-bg: rgba(42, 18, 36, 0.75);
             --accent-primary: #ffb703;
             --accent-secondary: #ff007f;
             --text-main: #fffcf7;
             --text-muted: #d4a373;
             --border-glow: rgba(255, 183, 3, 0.25);
-            --header-bg: rgba(18, 12, 8, 0.6);
+            --header-bg: rgba(26, 11, 22, 0.6);
+        }
+
+        /* Тема Summer 2: Изумруд (Emerald) */
+        [data-theme="summer-emerald"] {
+            --bg-color: #081c15;
+            --card-bg: rgba(16, 44, 34, 0.75);
+            --accent-primary: #ffb703;
+            --accent-secondary: #52b788;
+            --text-main: #f4f9f4;
+            --text-muted: #b7e4c7;
+            --border-glow: rgba(255, 183, 3, 0.25);
+            --header-bg: rgba(8, 28, 21, 0.6);
+        }
+
+        /* Тема Summer 3: Шоколад (Chocolate) */
+        [data-theme="summer-chocolate"] {
+            --bg-color: #1a120c;
+            --card-bg: rgba(44, 31, 22, 0.75);
+            --accent-primary: #ffb703;
+            --accent-secondary: #e07a5f;
+            --text-main: #fdf0ed;
+            --text-muted: #d8b4a0;
+            --border-glow: rgba(255, 183, 3, 0.25);
+            --header-bg: rgba(26, 18, 12, 0.6);
         }
 
         * {
@@ -100,16 +124,17 @@
             border: 1px solid var(--border-glow);
             border-radius: 20px;
             padding: 3px;
+            gap: 4px;
         }
 
         .theme-btn {
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 5px 14px;
+            padding: 5px 12px;
             border-radius: 16px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             transition: all 0.3s ease;
         }
@@ -222,10 +247,11 @@
             color: var(--text-muted);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .nav-container { flex-direction: column; gap: 0.8rem; padding: 0.5rem 0; }
+            header { flex-direction: column; align-items: flex-start; }
             .hero h1 { font-size: 2.5rem; }
             section { padding: 3rem 5%; }
-            .nav-container { gap: 1rem; }
         }
     </style>
 </head>
@@ -242,8 +268,10 @@
                 <a href="#projects">Проекты</a>
             </nav>
             <div class="theme-switch">
-                <button class="theme-btn active" id="btn-winter" onclick="setTheme('winter')">Winter ❄️</button>
-                <button class="theme-btn" id="btn-summer" onclick="setTheme('summer')">Summer ☀️</button>
+                <button class="theme-btn active" id="btn-winter" onclick="setTheme('winter')">❄️ Winter</button>
+                <button class="theme-btn" id="btn-sunset" onclick="setTheme('summer-sunset')">🌆 Sunset</button>
+                <button class="theme-btn" id="btn-emerald" onclick="setTheme('summer-emerald')">🌿 Emerald</button>
+                <button class="theme-btn" id="btn-choco" onclick="setTheme('summer-chocolate')">🍫 Choco</button>
             </div>
         </div>
     </header>
@@ -305,10 +333,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Цвета для тем 3D фона
         const themeColors = {
             winter: 0x00f2fe,
-            summer: 0xffb703
+            'summer-sunset': 0xffb703,
+            'summer-emerald': 0xffb703,
+            'summer-chocolate': 0xffb703
         };
 
         const canvas = document.getElementById('bg-canvas');
@@ -368,24 +397,25 @@
             mouseY = (e.clientY / window.innerHeight - 0.5) * 1.5;
         });
 
-        // Функция переключения тем
         function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            
-            const btnWinter = document.getElementById('btn-winter');
-            const btnSummer = document.getElementById('btn-summer');
-
-            if (theme === 'summer') {
-                btnSummer.classList.add('active');
-                btnWinter.classList.remove('active');
-                particlesMaterial.color.setHex(themeColors.summer);
-                linesMaterial.color.setHex(themeColors.summer);
+            if (theme === 'winter') {
+                document.documentElement.removeAttribute('data-theme');
             } else {
-                btnWinter.classList.add('active');
-                btnSummer.classList.remove('active');
-                particlesMaterial.color.setHex(themeColors.winter);
-                linesMaterial.color.setHex(themeColors.winter);
+                document.documentElement.setAttribute('data-theme', theme);
             }
+            
+            // Подсветка активной кнопки
+            ['winter', 'sunset', 'emerald', 'choco'].forEach(id => {
+                const btn = document.getElementById(id === 'winter' ? 'btn-winter' : `btn-${id}`);
+                if (btn) btn.classList.remove('active');
+            });
+
+            const activeBtnId = theme === 'winter' ? 'btn-winter' : `btn-${theme.replace('summer-', '')}`;
+            document.getElementById(activeBtnId).classList.add('active');
+
+            // Меняем цвет частиц под тему
+            particlesMaterial.color.setHex(themeColors[theme]);
+            linesMaterial.color.setHex(themeColors[theme]);
         }
 
         function animate() {
@@ -424,7 +454,6 @@
             linesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
 
             scene.rotation.y += 0.002;
-
             scene.rotation.x += (mouseY - scene.rotation.x) * 0.25;
             scene.rotation.y += (mouseX - scene.rotation.y) * 0.25;
 
