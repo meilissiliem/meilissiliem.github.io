@@ -160,59 +160,60 @@
             margin: 0 auto;
         }
 
-        /* Секция About на всю ширину с выравниванием по левому краю Hero */
+        /* Секция About — один общий плашка-контейнер от края до края */
         #about {
             width: 100%;
-            max-width: 100%;
             padding: 60px 60px;
             margin: 0;
         }
 
-        /* Двухколончатый контейнер для блока О себе / Картинки */
-        .about-container {
+        /* Общая плашка с плавной двухколончатой сеткой внутри */
+        .about-card-full {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: stretch;
+            gap: 40px;
+            padding: 50px;
+            align-items: center;
             width: 100%;
         }
 
-        /* Текстовый блок слева */
-        .about-block {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent-color);
+        /* Текстовая часть слева */
+        .about-text {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .about-block h3 {
-            font-size: 1.5rem;
+        .about-text h3 {
+            font-size: 1.6rem;
             margin-bottom: 15px;
             color: #fff;
             letter-spacing: 1px;
         }
 
-        .about-block p {
+        .about-text p {
             color: var(--text-dim);
             font-size: 1.05rem;
             line-height: 1.8;
         }
 
-        /* Блок под картинку справа */
-        .about-image {
+        /* Место под рендер справа */
+        .about-media {
             width: 100%;
-            min-height: 250px;
-            border-radius: 6px;
+            min-height: 280px;
+            border-radius: 4px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
-            background-color: #13171f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(11, 13, 16, 0.5);
+            border: 1px dashed var(--border-color);
         }
 
-        .about-image img {
+        .about-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -300,17 +301,14 @@
         }
 
         @media (max-width: 900px) {
-            .about-container {
+            .about-card-full {
                 grid-template-columns: 1fr;
+                padding: 30px;
             }
         }
 
         @media (max-width: 768px) {
-            header, .hero, section:not(.hero):not(#about) {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-            #about {
+            header, .hero, section:not(.hero):not(#about), #about {
                 padding-left: 20px;
                 padding-right: 20px;
             }
@@ -341,12 +339,12 @@
     </section>
 
     <section id="about">
-        <div class="about-container">
-            <div class="about-block">
+        <div class="about-card-full">
+            <div class="about-text">
                 <h3>Hard-Surface 3D Artist</h3>
                 <p>Я независимый 3D-художник, специализирующийся на Hard-Surface моделировании. Мой подход объединяет инженерную логику и художественную выразительность. Я помогаю игровым студиям и разработчикам воплощать сложные технические концепты, детализированный реквизит и функциональные элементы окружения, обеспечивая полный цикл производства: от первой фаски до шейдеров в игровом движке.</p>
             </div>
-            <div class="about-image">
+            <div class="about-media">
                 <img src="https://via.placeholder.com/800x450/13171f/00e5ff?text=Your+Render+Here" alt="Render Showcase">
             </div>
         </div>
