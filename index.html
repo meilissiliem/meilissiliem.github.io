@@ -154,29 +154,18 @@
             box-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
         }
 
-        section:not(.hero) {
+        section:not(.hero):not(#about) {
             padding: 80px 40px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background-color: var(--accent-color);
+        /* Секция About на всю ширину с выравниванием по левому краю Hero */
+        #about {
+            width: 100%;
+            max-width: 100%;
+            padding: 60px 60px;
+            margin: 0;
         }
 
         /* Двухколончатый контейнер для блока О себе / Картинки */
@@ -185,6 +174,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             align-items: stretch;
+            width: 100%;
         }
 
         /* Текстовый блок слева */
@@ -227,6 +217,25 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
         }
 
         .gallery-grid {
@@ -297,7 +306,11 @@
         }
 
         @media (max-width: 768px) {
-            header, .hero, section:not(.hero) {
+            header, .hero, section:not(.hero):not(#about) {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            #about {
                 padding-left: 20px;
                 padding-right: 20px;
             }
@@ -334,7 +347,6 @@
                 <p>Я независимый 3D-художник, специализирующийся на Hard-Surface моделировании. Мой подход объединяет инженерную логику и художественную выразительность. Я помогаю игровым студиям и разработчикам воплощать сложные технические концепты, детализированный реквизит и функциональные элементы окружения, обеспечивая полный цикл производства: от первой фаски до шейдеров в игровом движке.</p>
             </div>
             <div class="about-image">
-                <!-- Вставьте ваше изображение, заменив значение в src -->
                 <img src="https://via.placeholder.com/800x450/13171f/00e5ff?text=Your+Render+Here" alt="Render Showcase">
             </div>
         </div>
