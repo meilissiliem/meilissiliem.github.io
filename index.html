@@ -160,7 +160,7 @@
 
         .section-title {
             font-size: 2rem;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 2px;
             position: relative;
@@ -177,34 +177,27 @@
             background-color: var(--accent-color);
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .service-card {
+        /* Блок специализации (вместо карточек услуг) */
+        .about-block {
             background: var(--card-bg);
-            padding: 30px;
+            padding: 40px;
             border-radius: 6px;
             border: 1px solid var(--border-color);
-            transition: border-color 0.3s, transform 0.3s;
+            border-left: 4px solid var(--accent-color);
         }
 
-        .service-card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-5px);
-        }
-
-        .service-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
+        .about-block h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: #fff;
+            letter-spacing: 1px;
         }
 
-        .service-card p {
+        .about-block p {
             color: var(--text-dim);
-            font-size: 0.95rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 1100px;
         }
 
         .gallery-grid {
@@ -285,9 +278,8 @@
             MEILIS
         </div>
         <nav>
-            <a href="#services">Услуги</a>
+            <a href="#about">О специализации</a>
             <a href="#projects">Проекты</a>
-            <a href="#about">О студии</a>
             <a href="#contact">Контакты</a>
         </nav>
     </header>
@@ -300,25 +292,11 @@
         </div>
     </section>
 
-    <section id="services">
-        <h2 class="section-title">Услуги</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Concept Design</h3>
-                <p>Разработка концептов техники, оружия и механизмов с инженерной детализацией и подготовкой под анимацию.</p>
-            </div>
-            <div class="service-card">
-                <h3>3D Modeling Pipeline</h3>
-                <p>Полный цикл производства 3D-моделей (High-poly, Low-poly, UV, Baking, Texturing) под AAA-проекты.</p>
-            </div>
-            <div class="service-card">
-                <h3>Rigging & Animation</h3>
-                <p>Анимация сложных механизмов, узлов, шасси, процедурные системы и динамическое взаимодействие объектов.</p>
-            </div>
-            <div class="service-card">
-                <h3>Game Engines Integration</h3>
-                <p>Настройка материалов, шейдеров и оптимизация геометрии под требования Unreal Engine и Unity.</p>
-            </div>
+    <section id="about">
+        <h2 class="section-title">Специализация</h2>
+        <div class="about-block">
+            <h3>Hard-Surface & 3D Pipeline Specialist</h3>
+            <p>Проектирование и моделирование сложных пропсов, жестких поверхностей и технических элементов любой сложности. Фокус на чистой топологии, правильном распределении плотности текселя и адаптации геометрии под требования AAA-индустрии, кино и VR/AR.</p>
         </div>
     </section>
 
