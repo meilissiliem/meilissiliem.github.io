@@ -72,20 +72,20 @@
             color: var(--accent-color);
         }
 
-        /* Hero Section with Background Image */
+        /* Hero Section — 100% ширины окна без ограничений */
         .hero {
             position: relative;
-            width: 100%;
+            width: 100vw;
             min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding: 140px 60px 80px; /* Отступы только для внутреннего содержимого */
+            padding: 140px 60px 80px;
             
             /* Фоновое изображение */
             background-image: url('main.png');
-            background-size: cover;       /* Пропорциональное заполнение во все стороны без искажений */
+            background-size: cover;       /* Пропорциональное заполнение без искажений */
             background-position: center;  /* Центрирование кадра */
             background-repeat: no-repeat;
             border-bottom: 1px solid var(--border-color);
@@ -148,8 +148,8 @@
             box-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
         }
 
-        /* Grid Sections */
-        section {
+        /* Общие стили для секций (кроме hero) */
+        section:not(.hero) {
             padding: 80px 40px;
             max-width: 1400px;
             margin: 0 auto;
@@ -269,7 +269,7 @@
         }
 
         @media (max-width: 768px) {
-            header, .hero, section {
+            header, .hero, section:not(.hero) {
                 padding-left: 20px;
                 padding-right: 20px;
             }
