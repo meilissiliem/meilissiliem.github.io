@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D & Hard-Surface Studio Portfolio</title>
+    <title>MEILIS — 3D & Hard-Surface Studio Portfolio</title>
     <style>
         :root {
             --bg-color: #0b0d10;
@@ -48,8 +48,8 @@
 
         .logo {
             font-weight: 800;
-            font-size: 1.3rem;
-            letter-spacing: 2px;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
             color: #fff;
             text-transform: uppercase;
         }
@@ -72,24 +72,51 @@
             color: var(--accent-color);
         }
 
-        /* Hero Section */
+        /* Hero Section with Background Image */
         .hero {
-            min-height: 85vh;
+            position: relative;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding: 120px 40px 60px;
-            background: radial-gradient(circle at 80% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
+            padding: 140px 40px 80px;
+            
+            /* Укажите путь к вашему фоновому изображению вместо URL ниже */
+            background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Тёмное затемнение поверх картинки для читаемости текста */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg, 
+                rgba(11, 13, 16, 0.95) 0%, 
+                rgba(11, 13, 16, 0.75) 50%, 
+                rgba(11, 13, 16, 0.4) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Контент внутри Hero поверх затемнения */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
         }
 
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4.5rem);
             line-height: 1.1;
             font-weight: 800;
-            max-width: 900px;
             margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
 
         .hero p {
@@ -97,6 +124,7 @@
             color: var(--text-dim);
             max-width: 650px;
             margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         .btn {
@@ -109,12 +137,14 @@
             letter-spacing: 1px;
             text-decoration: none;
             border-radius: 4px;
-            transition: background 0.3s, transform 0.2s;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
         }
 
         .btn:hover {
             background-color: var(--accent-hover);
             transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
         }
 
         /* Grid Sections */
@@ -249,7 +279,7 @@
 <body>
 
     <header>
-        <div class="logo">RENDER<span>DOCK</span></div>
+        <div class="logo">MEILIS</div>
         <nav>
             <a href="#services">Услуги</a>
             <a href="#projects">Проекты</a>
@@ -259,9 +289,11 @@
     </header>
 
     <section class="hero">
-        <h1>3D Outsource & Concept Studio</h1>
-        <p>Высокодетализированный Hard-Surface дизайн, техника, вооружение и оптимизированные 3D-ассеты для игр, анимации и VR/AR проектов.</p>
-        <a href="#projects" class="btn">Смотреть проекты</a>
+        <div class="hero-content">
+            <h1>3D Outsource & Concept Studio</h1>
+            <p>Высокодетализированный Hard-Surface дизайн, техника, вооружение и оптимизированные 3D-ассеты для игр, анимации и VR/AR проектов.</p>
+            <a href="#projects" class="btn">Смотреть проекты</a>
+        </div>
     </section>
 
     <section id="services">
@@ -314,7 +346,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 RenderDock Style Studio. All rights reserved.</p>
+        <p>&copy; 2026 MEILIS Studio. All rights reserved.</p>
     </footer>
 
 </body>
