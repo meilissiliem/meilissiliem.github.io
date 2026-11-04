@@ -3,435 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meilis | 3D & Technical Artist Portfolio</title>
+    <title>3D & Hard-Surface Studio Portfolio</title>
     <style>
-        /* Тема Winter (По умолчанию) */
         :root {
-            --bg-color: #0b0d12;
-            --card-bg: rgba(22, 27, 38, 0.75);
-            --accent-primary: #00f2fe;
-            --accent-secondary: #9d4edd;
-            --text-main: #f0f3f8;
-            --text-muted: #94a3b8;
-            --border-glow: rgba(0, 242, 254, 0.2);
-            --header-bg: rgba(11, 13, 18, 0.6);
-        }
-
-        /* Тема Summer (Изумрудный фон с золотистыми акцентами) */
-        [data-theme="summer"] {
-            --bg-color: #081c15;
-            --card-bg: rgba(16, 44, 34, 0.75);
-            --accent-primary: #ffb703;
-            --accent-secondary: #52b788;
-            --text-main: #f4f9f4;
-            --text-muted: #b7e4c7;
-            --border-glow: rgba(255, 183, 3, 0.25);
-            --header-bg: rgba(8, 28, 21, 0.6);
+            --bg-color: #0b0d10;
+            --card-bg: #13171f;
+            --accent-color: #00e5ff;
+            --accent-hover: #00b3cc;
+            --text-color: #e0e6ed;
+            --text-dim: #8a99ad;
+            --border-color: #1f2833;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
         }
 
         body {
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        canvas#bg-canvas {
+        /* Header / Nav */
+        header {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        header {
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 5%;
-            backdrop-filter: blur(12px);
-            background: var(--header-bg);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            position: sticky;
-            top: 0;
+            padding: 20px 40px;
+            background: rgba(11, 13, 16, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
             z-index: 100;
         }
 
         .logo {
-            font-size: 1.5rem;
             font-weight: 800;
+            font-size: 1.3rem;
             letter-spacing: 2px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fff;
+            text-transform: uppercase;
         }
 
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
+        .logo span {
+            color: var(--accent-color);
         }
 
         nav a {
-            color: var(--text-muted);
+            color: var(--text-color);
             text-decoration: none;
-            transition: 0.3s;
-            font-weight: 500;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
         }
 
         nav a:hover {
-            color: var(--accent-primary);
-            text-shadow: 0 0 8px var(--border-glow);
+            color: var(--accent-color);
         }
 
-        /* Переключатель тем */
-        .theme-switch {
-            display: flex;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-glow);
-            border-radius: 20px;
-            padding: 3px;
-            gap: 4px;
-        }
-
-        .theme-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 5px 16px;
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .theme-btn.active {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: #fff;
-            box-shadow: 0 0 10px var(--border-glow);
-        }
-
+        /* Hero Section */
         .hero {
-            height: 85vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1rem;
+            align-items: flex-start;
+            padding: 120px 40px 60px;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 50%);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            font-weight: 800;
+            max-width: 900px;
+            margin-bottom: 20px;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2rem;
-            line-height: 1.6;
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin-bottom: 40px;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.8rem 2rem;
-            border-radius: 30px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: #fff;
+            padding: 14px 32px;
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 0 15px var(--border-glow);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.2s;
         }
 
         .btn:hover {
+            background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 0 25px var(--border-glow);
         }
 
+        /* Grid Sections */
         section {
-            padding: 5rem 10%;
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 3rem;
-            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             position: relative;
+            display: inline-block;
         }
 
         .section-title::after {
             content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--accent-primary);
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
         }
 
-        .grid {
+        /* Services Grid */
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 25px;
         }
 
-        .card {
+        .service-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 16px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s, border-color 0.3s;
+            padding: 30px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s, transform 0.3s;
         }
 
-        .card:hover {
+        .service-card:hover {
+            border-color: var(--accent-color);
             transform: translateY(-5px);
-            border-color: var(--accent-primary);
         }
 
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            color: var(--accent-primary);
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #fff;
         }
 
-        .card p {
-            color: var(--text-muted);
-            line-height: 1.5;
+        .service-card p {
+            color: var(--text-dim);
             font-size: 0.95rem;
         }
 
-        footer {
-            text-align: center;
-            padding: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
         }
 
-        @media (max-width: 900px) {
-            .nav-container { flex-direction: column; gap: 0.8rem; padding: 0.5rem 0; }
-            header { flex-direction: column; align-items: flex-start; }
-            .hero h1 { font-size: 2.5rem; }
-            section { padding: 3rem 5%; }
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background-color: #1a212b;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 13, 16, 0.9) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .gallery-overlay span {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header, .hero, section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            nav { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="bg-canvas"></canvas>
-
     <header>
-        <div class="logo">MEILIS</div>
-        <div class="nav-container">
-            <nav>
-                <a href="#about">Обо мне</a>
-                <a href="#skills">Навыки</a>
-                <a href="#projects">Проекты</a>
-            </nav>
-            <div class="theme-switch">
-                <button class="theme-btn active" id="btn-winter" onclick="setTheme('winter')">❄️ Winter</button>
-                <button class="theme-btn" id="btn-summer" onclick="setTheme('summer')">☀️ Summer</button>
-            </div>
-        </div>
+        <div class="logo">RENDER<span>DOCK</span></div>
+        <nav>
+            <a href="#services">Услуги</a>
+            <a href="#projects">Проекты</a>
+            <a href="#about">О студии</a>
+            <a href="#contact">Контакты</a>
+        </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>3D & Technical Artist</h1>
-            <p>Создание optimized game assets, пайплайны моделирования, UV-развертка, текстурирование и автоматизация сценариев.</p>
-            <a href="#projects" class="btn">Смотреть работы</a>
-        </section>
+    <section class="hero">
+        <h1>3D Outsource & Concept Studio</h1>
+        <p>Высокодетализированный Hard-Surface дизайн, техника, вооружение и оптимизированные 3D-ассеты для игр, анимации и VR/AR проектов.</p>
+        <a href="#projects" class="btn">Смотреть проекты</a>
+    </section>
 
-        <section id="about">
-            <h2 class="section-title">Обо мне</h2>
-            <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <p>Привет! Я 3D-художник и технический специалист. Специализируюсь на создании высокодетализированных High-Poly и оптимизированных Low-Poly моделей, запекании карт, текстурировании в Substance Painter, а также на разработке скриптов и инструментов для автоматизации пайплайнов в Blender и 3ds Max.</p>
+    <section id="services">
+        <h2 class="section-title">Услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Concept Design</h3>
+                <p>Разработка концептов техники, оружия и механизмов с инженерной детализацией и подготовкой под анимацию.</p>
             </div>
-        </section>
-
-        <section id="skills">
-            <h2 class="section-title">Навыки и софт</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>3D Modeling & Sculpting</h3>
-                    <p>High-poly / Low-poly моделирование, ZBrush, Blender, 3ds Max, оптимизация геометрии и топология под игровые движки.</p>
-                </div>
-                <div class="card">
-                    <h3>Texturing & Baking</h3>
-                    <p>Substance 3D Painter, Marmoset Toolbag, запекание Normal/AO карт, PBR текстурирование и работа с Texel Density.</p>
-                </div>
-                <div class="card">
-                    <h3>Pipeline & Scripting</h3>
-                    <p>Разработка пользовательских скриптов и аддонов на Python и PySide/Qt для автоматизации рутинных задач 3D-пайплайна.</p>
-                </div>
+            <div class="service-card">
+                <h3>3D Modeling Pipeline</h3>
+                <p>Полный цикл производства 3D-моделей (High-poly, Low-poly, UV, Baking, Texturing) под AAA-проекты.</p>
             </div>
-        </section>
+            <div class="service-card">
+                <h3>Rigging & Animation</h3>
+                <p>Анимация сложных механизмов, узлов, шасси, процедурные системы и динамическое взаимодействие объектов.</p>
+            </div>
+            <div class="service-card">
+                <h3>Game Engines Integration</h3>
+                <p>Настройка материалов, шейдеров и оптимизация геометрии под требования Unreal Engine и Unity.</p>
+            </div>
+        </div>
+    </section>
 
-        <section id="projects">
-            <h2 class="section-title">Проекты</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Game Props & Assets</h3>
-                    <p>Набор игровой атрибутики с полной PBR-текстуризацией и готовым LOD-пакетом.</p>
-                </div>
-                <div class="card">
-                    <h3>Environment Art</h3>
-                    <p>Модульные элементы окружения, настроенные материалы и оптический лод под игровые движки.</p>
-                </div>
-                <div class="card">
-                    <h3>Custom Python Plugins</h3>
-                    <p>Плагины и радиальные меню (Pie Menus) для ускорения работы в 3D-редакторах.</p>
+    <section id="projects">
+        <h2 class="section-title">Проекты</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x337/1a212b/00e5ff?text=Project+01" alt="Project 1">
+                <div class="gallery-overlay">
+                    <h4>Sci-Fi Vehicle Concept</h4>
+                    <span>Hard Surface / Hard-prop</span>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x337/1a212b/00e5ff?text=Project+02" alt="Project 2">
+                <div class="gallery-overlay">
+                    <h4>Combat Drone Unit</h4>
+                    <span>3D Model & Rigging</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x337/1a212b/00e5ff?text=Project+03" alt="Project 3">
+                <div class="gallery-overlay">
+                    <h4>Heavy Armaments Pack</h4>
+                    <span>Game Ready Asset</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p>© 2026 Meilis | Built with GitHub Pages</p>
+        <p>&copy; 2026 RenderDock Style Studio. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        const themeColors = {
-            winter: 0x00f2fe,
-            summer: 0xffb703
-        };
-
-        const canvas = document.getElementById('bg-canvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        const particleCount = 120;
-        const maxDistance = 2.2;
-        const positions = new Float32Array(particleCount * 3);
-        const velocities = [];
-
-        for (let i = 0; i < particleCount; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 12;
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 12;
-
-            velocities.push({
-                x: (Math.random() - 0.5) * 0.008,
-                y: (Math.random() - 0.5) * 0.008,
-                z: (Math.random() - 0.5) * 0.008
-            });
-        }
-
-        const particlesGeometry = new THREE.BufferGeometry();
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        const particlesMaterial = new THREE.PointsMaterial({
-            color: themeColors.winter,
-            size: 0.06,
-            transparent: true,
-            opacity: 0.8
-        });
-
-        const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particleSystem);
-
-        const linesGeometry = new THREE.BufferGeometry();
-        const linesMaterial = new THREE.LineBasicMaterial({
-            color: themeColors.winter,
-            transparent: true,
-            opacity: 0.2
-        });
-        const linesMesh = new THREE.LineSegments(linesGeometry, linesMaterial);
-        scene.add(linesMesh);
-
-        camera.position.z = 6;
-
-        let mouseX = 0;
-        let mouseY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth - 0.5) * 1.5;
-            mouseY = (e.clientY / window.innerHeight - 0.5) * 1.5;
-        });
-
-        function setTheme(theme) {
-            if (theme === 'winter') {
-                document.documentElement.removeAttribute('data-theme');
-            } else {
-                document.documentElement.setAttribute('data-theme', theme);
-            }
-            
-            document.getElementById('btn-winter').classList.toggle('active', theme === 'winter');
-            document.getElementById('btn-summer').classList.toggle('active', theme === 'summer');
-
-            particlesMaterial.color.setHex(themeColors[theme]);
-            linesMaterial.color.setHex(themeColors[theme]);
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            const posArr = particlesGeometry.attributes.position.array;
-
-            for (let i = 0; i < particleCount; i++) {
-                posArr[i * 3] += velocities[i].x;
-                posArr[i * 3 + 1] += velocities[i].y;
-                posArr[i * 3 + 2] += velocities[i].z;
-
-                if (Math.abs(posArr[i * 3]) > 6) velocities[i].x *= -1;
-                if (Math.abs(posArr[i * 3 + 1]) > 6) velocities[i].y *= -1;
-                if (Math.abs(posArr[i * 3 + 2]) > 6) velocities[i].z *= -1;
-            }
-            particlesGeometry.attributes.position.needsUpdate = true;
-
-            const linePositions = [];
-            for (let i = 0; i < particleCount; i++) {
-                for (let j = i + 1; j < particleCount; j++) {
-                    const dx = posArr[i * 3] - posArr[j * 3];
-                    const dy = posArr[i * 3 + 1] - posArr[j * 3 + 1];
-                    const dz = posArr[i * 3 + 2] - posArr[j * 3 + 2];
-                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                    if (dist < maxDistance) {
-                        linePositions.push(
-                            posArr[i * 3], posArr[i * 3 + 1], posArr[i * 3 + 2],
-                            posArr[j * 3], posArr[j * 3 + 1], posArr[j * 3 + 2]
-                        );
-                    }
-                }
-            }
-
-            linesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-
-            scene.rotation.y += 0.002;
-            scene.rotation.x += (mouseY - scene.rotation.x) * 0.25;
-            scene.rotation.y += (mouseX - scene.rotation.y) * 0.25;
-
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-    </script>
 </body>
 </html>
