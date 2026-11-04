@@ -160,22 +160,22 @@
             margin: 0 auto;
         }
 
-        /* Секция About — один общий плашка-контейнер от края до края */
+        /* Секция About — убираем отступы по краям для идеального заполнения */
         #about {
             width: 100%;
-            padding: 60px 60px;
+            padding: 60px 0;
             margin: 0;
         }
 
-        /* Общая плашка с плавной двухколончатой сеткой внутри */
+        /* Общая плашка на 100% ширины экрана от края до края */
         .about-card-full {
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
-            padding: 50px;
+            padding: 50px 60px;
             align-items: center;
             width: 100%;
         }
@@ -303,12 +303,12 @@
         @media (max-width: 900px) {
             .about-card-full {
                 grid-template-columns: 1fr;
-                padding: 30px;
+                padding: 40px 20px;
             }
         }
 
         @media (max-width: 768px) {
-            header, .hero, section:not(.hero):not(#about), #about {
+            header, .hero, section:not(.hero):not(#about) {
                 padding-left: 20px;
                 padding-right: 20px;
             }
