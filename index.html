@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEILIS — 3D & Hard-Surface Studio Portfolio</title>
+    <title>MEILIS — Hard-Surface & 3D Asset Specialist</title>
     <style>
         :root {
             --bg-color: #0b0d10;
@@ -41,30 +41,43 @@
             align-items: center;
             padding: 20px 40px;
             background: rgba(11, 13, 16, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(31, 40, 51, 0.5);
             z-index: 100;
         }
 
+        /* Стилизованный логотип */
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px; /* Расстояние между гифкой и текстом */
+            gap: 14px;
             font-weight: 800;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             letter-spacing: 3px;
             color: #fff;
             text-transform: uppercase;
         }
 
         .logo img {
-            height: 50px; /* Аккуратная высота гифки под размер шрифта */
+            height: 32px;
             width: auto;
             object-fit: contain;
         }
 
-        .logo span {
+        .logo-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 2px;
             color: var(--accent-color);
+            padding-left: 10px;
+            border-left: 1px solid var(--border-color);
         }
 
         nav a {
@@ -85,54 +98,51 @@
         .hero {
             position: relative;
             width: 100%;
-            aspect-ratio: 1920 / 1080; /* Строгие пропорции исходной картинки */
+            aspect-ratio: 1920 / 1080;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
             padding: 100px 60px 40px;
             
-            /* Фоновое изображение */
             background-image: url('main.png');
-            background-size: 100% 100%; /* Растягивает ровно под размеры блока без обрезки */
+            background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
             border-bottom: 1px solid var(--border-color);
         }
 
-        /* Тёмное затемнение поверх картинки для читаемости текста */
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
             background: linear-gradient(
                 90deg, 
-                rgba(11, 13, 16, 0.9) 0%, 
+                rgba(11, 13, 16, 0.92) 0%, 
                 rgba(11, 13, 16, 0.65) 50%, 
                 rgba(11, 13, 16, 0.2) 100%
             );
             z-index: 1;
         }
 
-        /* Контент внутри Hero поверх затемнения */
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 850px;
         }
 
         .hero h1 {
-            font-size: clamp(2.2rem, 4.5vw, 4rem);
-            line-height: 1.1;
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            line-height: 1.15;
             font-weight: 800;
             margin-bottom: 20px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-dim);
-            max-width: 600px;
+            max-width: 680px;
             margin-bottom: 35px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
@@ -157,7 +167,6 @@
             box-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
         }
 
-        /* Общие стили для секций (кроме hero) */
         section:not(.hero) {
             padding: 80px 40px;
             max-width: 1400px;
@@ -183,7 +192,6 @@
             background-color: var(--accent-color);
         }
 
-        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -214,7 +222,6 @@
             font-size: 0.95rem;
         }
 
-        /* Gallery Grid */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -268,7 +275,6 @@
             text-transform: uppercase;
         }
 
-        /* Footer */
         footer {
             border-top: 1px solid var(--border-color);
             padding: 40px;
@@ -282,6 +288,7 @@
                 padding-left: 20px;
                 padding-right: 20px;
             }
+            .logo-tag { display: none; }
             nav { display: none; }
         }
     </style>
@@ -290,8 +297,11 @@
 
     <header>
         <div class="logo">
-            <img src="Logo_anim.webp" alt="Logo Animation">
-            MEILIS
+            <img src="Logo_anim.gif" alt="Logo Animation">
+            <div class="logo-text">
+                <span>MEILIS</span>
+                <span class="logo-tag">3D ARTIST</span>
+            </div>
         </div>
         <nav>
             <a href="#services">Услуги</a>
@@ -303,8 +313,8 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1>3D Outsource & Concept Studio</h1>
-            <p>Высокодетализированный Hard-Surface дизайн, техника, вооружение и оптимизированные 3D-ассеты для игр, анимации и VR/AR проектов.</p>
+            <h1>Hard-Surface & 3D Asset Specialist</h1>
+            <p>Профессиональная разработка жестких поверхностей, техники, вооружения и сложных пропсов. Создание ассетов под ключ: от ультрадетализированных моделей для синематиков до оптимизированных Game-ready пайплайнов для игр и VR/AR.</p>
             <a href="#projects" class="btn">Смотреть проекты</a>
         </div>
     </section>
@@ -359,7 +369,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 MEILIS Studio. All rights reserved.</p>
+        <p>&copy; 2026 MEILIS. All rights reserved.</p>
     </footer>
 
 </body>
