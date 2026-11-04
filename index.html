@@ -72,12 +72,11 @@
             color: var(--accent-color);
         }
 
-        /* Hero Section — Пропорциональное отображение всей картинки 16:9 */
+        /* Hero Section — Точное вписывание картинки 1920x1080 без обрезок */
         .hero {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9; /* Автоматически высчитывает высоту под ширину изображения */
-            min-height: 500px;
+            aspect-ratio: 1920 / 1080; /* Строгие пропорции исходной картинки */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -86,7 +85,7 @@
             
             /* Фоновое изображение */
             background-image: url('main.png');
-            background-size: 100% 100%; /* Картинка полностью заполняет всю область */
+            background-size: 100% 100%; /* Растягивает ровно под размеры блока 1920x1080 без обрезки */
             background-position: center;
             background-repeat: no-repeat;
             border-bottom: 1px solid var(--border-color);
@@ -99,8 +98,8 @@
             inset: 0;
             background: linear-gradient(
                 90deg, 
-                rgba(11, 13, 16, 0.92) 0%, 
-                rgba(11, 13, 16, 0.7) 45%, 
+                rgba(11, 13, 16, 0.9) 0%, 
+                rgba(11, 13, 16, 0.65) 50%, 
                 rgba(11, 13, 16, 0.2) 100%
             );
             z-index: 1;
@@ -273,10 +272,6 @@
             header, .hero, section:not(.hero) {
                 padding-left: 20px;
                 padding-right: 20px;
-            }
-            .hero {
-                aspect-ratio: auto;
-                min-height: 80vh;
             }
             nav { display: none; }
         }
