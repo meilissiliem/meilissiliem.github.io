@@ -75,17 +75,18 @@
         /* Hero Section with Background Image */
         .hero {
             position: relative;
+            width: 100%;
             min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding: 140px 40px 80px;
+            padding: 140px 60px 80px; /* Отступы только для внутреннего содержимого */
             
-            /* Укажите путь к вашему фоновому изображению вместо URL ниже */
+            /* Фоновое изображение */
             background-image: url('main.png');
-            background-size: cover;
-            background-position: center;
+            background-size: cover;       /* Пропорциональное заполнение во все стороны без искажений */
+            background-position: center;  /* Центрирование кадра */
             background-repeat: no-repeat;
             border-bottom: 1px solid var(--border-color);
         }
