@@ -1,4 +1,53 @@
-/* Стилизованный логотип с градиентом слева направо */
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEILIS — Hard-Surface & 3D Asset Specialist</title>
+    <style>
+        :root {
+            --bg-color: #0b0d10;
+            --card-bg: #13171f;
+            --accent-color: #00e5ff;
+            --accent-hover: #00b3cc;
+            --text-color: #e0e6ed;
+            --text-dim: #8a99ad;
+            --border-color: #1f2833;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header / Nav */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(11, 13, 16, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(31, 40, 51, 0.5);
+            z-index: 100;
+        }
+
+        /* Стилизованный логотип */
         .logo {
             display: flex;
             align-items: center;
@@ -22,7 +71,7 @@
             gap: 10px;
         }
 
-        /* Градиент для имени MEILIS (слева направо) */
+        /* Градиент для имени MEILIS слева направо */
         .logo-name {
             background: linear-gradient(90deg, #ffffff 0%, #00e5ff 100%);
             -webkit-background-clip: text;
@@ -37,3 +86,297 @@
             padding-left: 10px;
             border-left: 1px solid var(--border-color);
         }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1920 / 1080;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 100px 60px 40px;
+            background-image: url('main.png');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg, 
+                rgba(11, 13, 16, 0.92) 0%, 
+                rgba(11, 13, 16, 0.65) 50%, 
+                rgba(11, 13, 16, 0.2) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            line-height: 1.15;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            max-width: 680px;
+            margin-bottom: 35px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
+        }
+
+        section:not(.hero) {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background-color: #1a212b;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 13, 16, 0.9) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .gallery-overlay span {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header, .hero, section:not(.hero) {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .logo-tag { display: none; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="Logo_anim.webp" alt="Logo Animation">
+            <div class="logo-text">
+                <span class="logo-name">MEILIS</span>
+                <span class="logo-tag">3D ARTIST</span>
+            </div>
+        </div>
+        <nav>
+            <a href="#services">Услуги</a>
+            <a href="#projects">Проекты</a>
+            <a href="#about">О студии</a>
+            <a href="#contact">Контакты</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hard-Surface & 3D Asset Specialist</h1>
+            <p>Профессиональная разработка жестких поверхностей, техники, вооружения и сложных пропсов. Создание ассетов под ключ: от ультрадетализированных моделей для синематиков до оптимизированных Game-ready пайплайнов для игр и VR/AR.</p>
+            <a href="#projects" class="btn">Смотреть проекты</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">Услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Concept Design</h3>
+                <p>Разработка концептов техники, оружия и механизмов с инженерной детализацией и подготовкой под анимацию.</p>
+            </div>
+            <div class="service-card">
+                <h3>3D Modeling Pipeline</h3>
+                <p>Полный цикл производства 3D-моделей (High-poly, Low-poly, UV, Baking, Texturing) под AAA-проекты.</p>
+            </div>
+            <div class="service-card">
+                <h3>Rigging & Animation</h3>
+                <p>Анимация сложных механизмов, узлов, шасси, процедурные системы и динамическое взаимодействие объектов.</p>
+            </div>
+            <div class="service-card">
+                <h3>Game Engines Integration</h3>
+                <p>Настройка материалов, шейдеров и оптимизация геометрии под требования Unreal Engine и Unity.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Проекты</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x337/1a212b/00e5ff?text=Project+01" alt="Project 1">
+                <div class="gallery-overlay">
+                    <h4>Sci-Fi Vehicle Concept</h4>
+                    <span>Hard Surface / Hard-prop</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x337/1a212b/00e5ff?text=Project+02" alt="Project 2">
+                <div class="gallery-overlay">
+                    <h4>Combat Drone Unit</h4>
+                    <span>3D Model & Rigging</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/600x337/1a212b/00e5ff?text=Project+03" alt="Project 3">
+                <div class="gallery-overlay">
+                    <h4>Heavy Armaments Pack</h4>
+                    <span>Game Ready Asset</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MEILIS. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
