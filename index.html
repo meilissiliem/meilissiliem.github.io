@@ -17,20 +17,8 @@
             --header-bg: rgba(11, 13, 18, 0.6);
         }
 
-        /* Тема Summer 1: Закат (Sunset) */
-        [data-theme="summer-sunset"] {
-            --bg-color: #1a0b16;
-            --card-bg: rgba(42, 18, 36, 0.75);
-            --accent-primary: #ffb703;
-            --accent-secondary: #ff007f;
-            --text-main: #fffcf7;
-            --text-muted: #d4a373;
-            --border-glow: rgba(255, 183, 3, 0.25);
-            --header-bg: rgba(26, 11, 22, 0.6);
-        }
-
-        /* Тема Summer 2: Изумруд (Emerald) */
-        [data-theme="summer-emerald"] {
+        /* Тема Summer (Изумрудный фон с золотистыми акцентами) */
+        [data-theme="summer"] {
             --bg-color: #081c15;
             --card-bg: rgba(16, 44, 34, 0.75);
             --accent-primary: #ffb703;
@@ -39,18 +27,6 @@
             --text-muted: #b7e4c7;
             --border-glow: rgba(255, 183, 3, 0.25);
             --header-bg: rgba(8, 28, 21, 0.6);
-        }
-
-        /* Тема Summer 3: Шоколад (Chocolate) */
-        [data-theme="summer-chocolate"] {
-            --bg-color: #1a120c;
-            --card-bg: rgba(44, 31, 22, 0.75);
-            --accent-primary: #ffb703;
-            --accent-secondary: #e07a5f;
-            --text-main: #fdf0ed;
-            --text-muted: #d8b4a0;
-            --border-glow: rgba(255, 183, 3, 0.25);
-            --header-bg: rgba(26, 18, 12, 0.6);
         }
 
         * {
@@ -131,10 +107,10 @@
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 5px 12px;
+            padding: 5px 16px;
             border-radius: 16px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             transition: all 0.3s ease;
         }
@@ -269,9 +245,7 @@
             </nav>
             <div class="theme-switch">
                 <button class="theme-btn active" id="btn-winter" onclick="setTheme('winter')">❄️ Winter</button>
-                <button class="theme-btn" id="btn-sunset" onclick="setTheme('summer-sunset')">🌆 Sunset</button>
-                <button class="theme-btn" id="btn-emerald" onclick="setTheme('summer-emerald')">🌿 Emerald</button>
-                <button class="theme-btn" id="btn-choco" onclick="setTheme('summer-chocolate')">🍫 Choco</button>
+                <button class="theme-btn" id="btn-summer" onclick="setTheme('summer')">☀️ Summer</button>
             </div>
         </div>
     </header>
@@ -335,9 +309,7 @@
     <script>
         const themeColors = {
             winter: 0x00f2fe,
-            'summer-sunset': 0xffb703,
-            'summer-emerald': 0xffb703,
-            'summer-chocolate': 0xffb703
+            summer: 0xffb703
         };
 
         const canvas = document.getElementById('bg-canvas');
@@ -404,16 +376,9 @@
                 document.documentElement.setAttribute('data-theme', theme);
             }
             
-            // Подсветка активной кнопки
-            ['winter', 'sunset', 'emerald', 'choco'].forEach(id => {
-                const btn = document.getElementById(id === 'winter' ? 'btn-winter' : `btn-${id}`);
-                if (btn) btn.classList.remove('active');
-            });
+            document.getElementById('btn-winter').classList.toggle('active', theme === 'winter');
+            document.getElementById('btn-summer').classList.toggle('active', theme === 'summer');
 
-            const activeBtnId = theme === 'winter' ? 'btn-winter' : `btn-${theme.replace('summer-', '')}`;
-            document.getElementById(activeBtnId).classList.add('active');
-
-            // Меняем цвет частиц под тему
             particlesMaterial.color.setHex(themeColors[theme]);
             linesMaterial.color.setHex(themeColors[theme]);
         }
