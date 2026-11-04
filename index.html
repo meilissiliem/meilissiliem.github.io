@@ -47,11 +47,20 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Расстояние между гифкой и текстом */
             font-weight: 800;
             font-size: 1.4rem;
             letter-spacing: 3px;
             color: #fff;
             text-transform: uppercase;
+        }
+
+        .logo img {
+            height: 28px; /* Аккуратная высота гифки под размер шрифта */
+            width: auto;
+            object-fit: contain;
         }
 
         .logo span {
@@ -85,7 +94,7 @@
             
             /* Фоновое изображение */
             background-image: url('main.png');
-            background-size: 100% 100%; /* Растягивает ровно под размеры блока 1920x1080 без обрезки */
+            background-size: 100% 100%; /* Растягивает ровно под размеры блока без обрезки */
             background-position: center;
             background-repeat: no-repeat;
             border-bottom: 1px solid var(--border-color);
@@ -280,7 +289,10 @@
 <body>
 
     <header>
-        <div class="logo">MEILIS</div>
+        <div class="logo">
+            <img src="Logo_anim.gif" alt="Logo Animation">
+            MEILIS
+        </div>
         <nav>
             <a href="#services">Услуги</a>
             <a href="#projects">Проекты</a>
