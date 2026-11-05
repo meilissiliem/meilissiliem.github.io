@@ -76,6 +76,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         nav a:hover {
@@ -292,6 +293,95 @@
             text-transform: uppercase;
         }
 
+        /* Занавес / Модальное окно контактов */
+        .contact-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 13, 16, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .contact-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .contact-modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 50px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .contact-overlay.active .contact-modal {
+            transform: translateY(0);
+        }
+
+        .contact-modal h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .contact-modal p {
+            color: var(--text-dim);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .contact-info-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .contact-info-list li {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info-list a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info-list a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+
         footer {
             border-top: 1px solid var(--border-color);
             padding: 40px;
@@ -326,9 +416,23 @@
         <nav>
             <a href="#about">О специализации</a>
             <a href="#projects">Проекты</a>
-            <a href="#contact">Контакты</a>
+            <a id="nav-contact" href="#">Контакты</a>
         </nav>
     </header>
+
+    <!-- Занавес / Модальное окно -->
+    <div id="contact-overlay" class="contact-overlay">
+        <div class="contact-modal">
+            <button id="close-modal" class="close-btn">&times;</button>
+            <h2>Контакты</h2>
+            <p>Свяжитесь со мной для обсуждения проектов и сотрудничества:</p>
+            <ul class="contact-info-list">
+                <li>Email: <a href="mailto:your_email@example.com">your_email@example.com</a></li>
+                <li>Telegram: <a href="https://t.me/your_username" target="_blank">@your_username</a></li>
+                <li>ArtStation: <a href="https://artstation.com" target="_blank">profile link</a></li>
+            </ul>
+        </div>
+    </div>
 
     <section class="hero">
         <div class="hero-content">
@@ -380,6 +484,31 @@
     <footer>
         <p>&copy; 2026 MEILIS. All rights reserved.</p>
     </footer>
+
+    <!-- Скрипт для управления занавесом -->
+    <script>
+        const navContact = document.getElementById('nav-contact');
+        const contactOverlay = document.getElementById('contact-overlay');
+        const closeModal = document.getElementById('close-modal');
+
+        // Открытие занавеса при клике на «Контакты»
+        navContact.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactOverlay.classList.add('active');
+        });
+
+        // Закрытие по крестику
+        closeModal.addEventListener('click', () => {
+            contactOverlay.classList.remove('active');
+        });
+
+        // Закрытие при клике по фону занавеса
+        contactOverlay.addEventListener('click', (e) => {
+            if (e.target === contactOverlay) {
+                contactOverlay.classList.remove('active');
+            }
+        });
+    </script>
 
 </body>
 </html>
