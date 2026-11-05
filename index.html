@@ -293,36 +293,54 @@
             text-transform: uppercase;
         }
 
-        /* Занавес контактов: выезжает справа налево на 50% ширины экрана */
+        /* Занавес контактов: полупрозрачный, выезжает справа, текст сдвинут влево */
         .contact-overlay {
             position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 13, 16, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .contact-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .contact-panel {
+            position: absolute;
             top: 0;
             right: 0;
             width: 50%;
             height: 100%;
-            background: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
+            background: rgba(19, 23, 31, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid var(--border-color);
+            box-shadow: -20px 0 50px rgba(0, 0, 0, 0.8);
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 60px;
-            border-left: 1px solid var(--border-color);
-            box-shadow: -20px 0 50px rgba(0, 0, 0, 0.8);
             transform: translateX(100%);
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .contact-overlay.active {
+        .contact-overlay.active .contact-panel {
             transform: translateX(0);
         }
 
         .contact-content {
-            position: relative;
-            max-width: 500px;
-            margin: 0 auto;
             width: 100%;
+            max-width: 450px;
+            text-align: left; /* Текст сдвинут налево */
         }
 
         .contact-content h2 {
@@ -360,16 +378,18 @@
             text-decoration: underline;
         }
 
+        /* Кнопка закрытия закреплена в правом верхнем углу панели */
         .close-btn {
             position: absolute;
-            top: -100px;
-            right: 0;
+            top: 25px;
+            right: 30px;
             background: none;
             border: none;
             color: var(--text-dim);
             font-size: 2.2rem;
             cursor: pointer;
             transition: color 0.3s;
+            line-height: 1;
         }
 
         .close-btn:hover {
@@ -389,14 +409,9 @@
                 grid-template-columns: 1fr;
                 padding: 40px 20px;
             }
-            /* На мобильных устройствах занавес раскрывается на весь экран */
-            .contact-overlay {
+            .contact-panel {
                 width: 100%;
                 padding: 40px 20px;
-            }
-            .close-btn {
-                top: 0;
-                right: 0;
             }
         }
 
@@ -423,17 +438,19 @@
         </nav>
     </header>
 
-    <!-- Занавес контактов: выезжает справа, занимает ровно половину ширины и всю высоту -->
+    <!-- Занавес контактов -->
     <div id="contact-overlay" class="contact-overlay">
-        <div class="contact-content">
+        <div class="contact-panel">
             <button id="close-modal" class="close-btn">&times;</button>
-            <h2>Контакты</h2>
-            <p>Свяжитесь со мной для обсуждения проектов и сотрудничества:</p>
-            <ul class="contact-info-list">
-                <li>Email: <a href="mailto:your_email@example.com">your_email@example.com</a></li>
-                <li>Telegram: <a href="https://t.me/your_username" target="_blank">@your_username</a></li>
-                <li>ArtStation: <a href="https://artstation.com" target="_blank">profile link</a></li>
-            </ul>
+            <div class="contact-content">
+                <h2>Контакты</h2>
+                <p>Свяжитесь со мной для обсуждения проектов и сотрудничества:</p>
+                <ul class="contact-info-list">
+                    <li>Email: <a href="mailto:your_email@example.com">your_email@example.com</a></li>
+                    <li>Telegram: <a href="https://t.me/your_username" target="_blank">@your_username</a></li>
+                    <li>ArtStation: <a href="https://artstation.com" target="_blank">profile link</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -488,10 +505,11 @@
         <p>&copy; 2026 MEILIS. All rights reserved.</p>
     </footer>
 
-    <!-- Скрипт анимации занавеса -->
+    <!-- Скрипт управления занавесом и закрытия по клику вне панели -->
     <script>
         const navContact = document.getElementById('nav-contact');
         const contactOverlay = document.getElementById('contact-overlay');
+        const contactPanel = document.querySelector('.contact-panel');
         const closeModal = document.getElementById('close-modal');
 
         navContact.addEventListener('click', (e) => {
@@ -501,6 +519,13 @@
 
         closeModal.addEventListener('click', () => {
             contactOverlay.classList.remove('active');
+        });
+
+        // Закрытие при клике по фону (вне самой панели)
+        contactOverlay.addEventListener('click', (e) => {
+            if (!contactPanel.contains(e.target)) {
+                contactOverlay.classList.remove('active');
+            }
         });
     </script>
 
