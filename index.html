@@ -95,7 +95,7 @@
             justify-content: center;
             align-items: flex-start;
             padding: 100px 60px 40px;
-            background-image: url('main.webp'); /* Обновлено имя файла фона */
+            background-image: url('main.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -203,7 +203,7 @@
             line-height: 1.8;
         }
 
-        /* Картинка справа */
+        /* Блок под картинку с поддержкой прозрачности */
         .about-media {
             width: 100%;
             min-height: 280px;
@@ -212,13 +212,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: rgba(11, 13, 16, 0.5);
+            background: transparent; /* Полная прозрачность для альфа-канала webp */
         }
 
         .about-media img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Изменили на contain, чтобы прозрачная картинка не обрезалась по краям */
             display: block;
         }
 
@@ -516,7 +516,7 @@
                 <p>Я независимый 3D-художник, специализирующийся на Hard-Surface моделировании. Мой подход объединяет инженерную логику и художественную выразительность. Я помогаю игровым студиям и разработчикам воплощать сложные технические концепты, детализированный реквизит и функциональные элементы окружения, обеспечивая полный цикл производства: от первой фаски до экспорта финальных текстур.</p>
             </div>
             <div class="about-media">
-                <img src="about.webp" alt="About Showcase"> <!-- Подключен файл about.webp -->
+                <img src="about.webp" alt="About Showcase">
             </div>
         </div>
     </section>
