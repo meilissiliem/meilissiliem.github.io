@@ -51,7 +51,7 @@
             z-index: 100;
         }
 
-        /* Логотип */
+        /* Логотип с возможностью клика */
         .logo {
             display: flex;
             align-items: center;
@@ -61,6 +61,12 @@
             letter-spacing: 3px;
             color: #fff;
             text-transform: uppercase;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .logo img {
@@ -212,13 +218,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: transparent; /* Полная прозрачность для альфа-канала webp */
+            background: transparent;
         }
 
         .about-media img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Изменили на contain, чтобы прозрачная картинка не обрезалась по краям */
+            object-fit: contain;
             display: block;
         }
 
@@ -294,7 +300,7 @@
             text-transform: uppercase;
         }
 
-        /* Занавес контактов */
+        /* Занавес (общий для логотипа и контактов) */
         .contact-overlay {
             position: fixed;
             top: 0;
@@ -356,6 +362,15 @@
             color: var(--text-dim);
             margin-bottom: 30px;
             font-size: 1.1rem;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-style: italic;
+            line-height: 1.4;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
         }
 
         .contact-info-list {
@@ -472,7 +487,7 @@
 <body>
 
     <header>
-        <div class="logo">
+        <div id="logo-trigger" class="logo">
             <img src="Logo_anim.webp" alt="Logo Animation">
             MEILIS
         </div>
@@ -483,20 +498,28 @@
         </nav>
     </header>
 
-    <!-- Занавес контактов -->
+    <!-- Занавес (общий для логотипа и контактов) -->
     <div id="contact-overlay" class="contact-overlay">
         <div class="contact-panel">
             <button id="close-modal" class="close-btn">&times;</button>
             <div class="contact-content">
-                <h2>Контакты</h2>
-                <p>Свяжитесь со мной для обсуждения проектов и сотрудничества:</p>
-                <ul class="contact-info-list">
-                    <li>Email: <a href="mailto:meylis.dalchyn@gmail.com">meylis.dalchyn@gmail.com</a></li>
-                    <li>Telegram: <a href="https://t.me/meilissiliem" target="_blank">@meilissiliem</a></li>
-                    <li>Instagram: <a href="https://www.instagram.com/siliemmeilis/" target="_blank">@siliemmeilis</a></li>
-                    <li>WhatsApp: <a href="https://wa.me/meilissiliem" target="_blank">chat link</a></li>
-                    <li>ArtStation: <a href="https://www.artstation.com/meilis" target="_blank">profile link</a></li>
-                </ul>
+                <!-- Контент меняется в зависимости от того, что нажали (логотип или контакты) -->
+                <div id="panel-logo-content" style="display: none;">
+                    <h2>Манифест</h2>
+                    <p class="quote-text">«Чтобы делать классику, нужна свобода.»</p>
+                    <p>Философия бескомпромиссного качества и чистоты линий в каждом проекте.</p>
+                </div>
+                <div id="panel-contact-content" style="display: none;">
+                    <h2>Контакты</h2>
+                    <p>Свяжитесь со мной для обсуждения проектов и сотрудничества:</p>
+                    <ul class="contact-info-list">
+                        <li>Email: <a href="mailto:meylis.dalchyn@gmail.com">meylis.dalchyn@gmail.com</a></li>
+                        <li>Telegram: <a href="https://t.me/meilissiliem" target="_blank">@meilissiliem</a></li>
+                        <li>Instagram: <a href="https://www.instagram.com/siliemmeilis/" target="_blank">@siliemmeilis</a></li>
+                        <li>WhatsApp: <a href="https://wa.me/meilissiliem" target="_blank">chat link</a></li>
+                        <li>ArtStation: <a href="https://www.artstation.com/meilis" target="_blank">profile link</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -559,15 +582,30 @@
         </div>
     </footer>
 
-    <!-- Скрипт управления занавесом -->
+    <!-- Скрипт управления занавесом (Контакты + Логотип) -->
     <script>
+        const logoTrigger = document.getElementById('logo-trigger');
         const navContact = document.getElementById('nav-contact');
         const contactOverlay = document.getElementById('contact-overlay');
         const contactPanel = document.querySelector('.contact-panel');
         const closeModal = document.getElementById('close-modal');
+        
+        const panelLogoContent = document.getElementById('panel-logo-content');
+        const panelContactContent = document.getElementById('panel-contact-content');
 
+        // Открытие по клику на Логотип
+        logoTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            panelLogoContent.style.display = 'block';
+            panelContactContent.style.display = 'none';
+            contactOverlay.classList.add('active');
+        });
+
+        // Открытие по клику на Контакты
         navContact.addEventListener('click', (e) => {
             e.preventDefault();
+            panelLogoContent.style.display = 'none';
+            panelContactContent.style.display = 'block';
             contactOverlay.classList.add('active');
         });
 
