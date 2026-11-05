@@ -300,8 +300,8 @@
             text-transform: uppercase;
         }
 
-        /* Занавес (общий для логотипа и контактов) */
-        .contact-overlay {
+        /* Общий оверлей для занавесов */
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -316,12 +316,37 @@
             transition: opacity 0.4s ease, visibility 0.4s ease;
         }
 
-        .contact-overlay.active {
+        .overlay.active {
             opacity: 1;
             visibility: visible;
         }
 
-        .contact-panel {
+        /* Левая панель (для логотипа / фразы) */
+        .left-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(19, 23, 31, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-right: 1px solid var(--border-color);
+            box-shadow: 20px 0 50px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+            transform: translateX(-100%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .overlay.active .left-panel {
+            transform: translateX(0);
+        }
+
+        /* Правая панель (для контактов) */
+        .right-panel {
             position: absolute;
             top: 0;
             right: 0;
@@ -340,17 +365,26 @@
             transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .contact-overlay.active .contact-panel {
+        .overlay.active .right-panel {
             transform: translateX(0);
         }
 
-        .contact-content {
+        .panel-content {
             width: 100%;
             max-width: 450px;
             text-align: left;
         }
 
-        .contact-content h2 {
+        /* Увеличенный размер фразы вдвое */
+        .quote-text {
+            font-size: 3rem;
+            color: var(--accent-color);
+            font-style: italic;
+            line-height: 1.3;
+            text-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
+        }
+
+        .right-panel h2 {
             font-size: 2.2rem;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -358,19 +392,10 @@
             color: #fff;
         }
 
-        .contact-content p {
+        .right-panel p {
             color: var(--text-dim);
             margin-bottom: 30px;
             font-size: 1.1rem;
-        }
-
-        .quote-text {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            font-style: italic;
-            line-height: 1.4;
-            margin-bottom: 30px;
-            text-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
         }
 
         .contact-info-list {
@@ -448,7 +473,7 @@
                 grid-template-columns: 1fr;
                 padding: 40px 20px;
             }
-            .contact-panel {
+            .left-panel, .right-panel {
                 width: 100%;
                 padding: 40px 20px;
             }
@@ -498,28 +523,30 @@
         </nav>
     </header>
 
-    <!-- Занавес (общий для логотипа и контактов) -->
-    <div id="contact-overlay" class="contact-overlay">
-        <div class="contact-panel">
-            <button id="close-modal" class="close-btn">&times;</button>
-            <div class="contact-content">
-                <!-- Контент меняется в зависимости от того, что нажали (логотип или контакты) -->
-                <div id="panel-logo-content" style="display: none;">
-                    <h2>Манифест</h2>
-                    <p class="quote-text">«Чтобы делать классику, нужна свобода.»</p>
-                    <p>Философия бескомпромиссного качества и чистоты линий в каждом проекте.</p>
-                </div>
-                <div id="panel-contact-content" style="display: none;">
-                    <h2>Контакты</h2>
-                    <p>Свяжитесь со мной для обсуждения проектов и сотрудничества:</p>
-                    <ul class="contact-info-list">
-                        <li>Email: <a href="mailto:meylis.dalchyn@gmail.com">meylis.dalchyn@gmail.com</a></li>
-                        <li>Telegram: <a href="https://t.me/meilissiliem" target="_blank">@meilissiliem</a></li>
-                        <li>Instagram: <a href="https://www.instagram.com/siliemmeilis/" target="_blank">@siliemmeilis</a></li>
-                        <li>WhatsApp: <a href="https://wa.me/meilissiliem" target="_blank">chat link</a></li>
-                        <li>ArtStation: <a href="https://www.artstation.com/meilis" target="_blank">profile link</a></li>
-                    </ul>
-                </div>
+    <!-- Занавес слева (для логотипа с фразой) -->
+    <div id="logo-overlay" class="overlay">
+        <div class="left-panel">
+            <button class="close-btn logo-close">&times;</button>
+            <div class="panel-content">
+                <p class="quote-text">«Чтобы делать классику, нужна свобода.»</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Занавес справа (для контактов) -->
+    <div id="contact-overlay" class="overlay">
+        <div class="right-panel">
+            <button class="close-btn contact-close">&times;</button>
+            <div class="panel-content">
+                <h2>Контакты</h2>
+                <p>Свяжитесь со мной для обсуждения проектов и сотрудничества:</p>
+                <ul class="contact-info-list">
+                    <li>Email: <a href="mailto:meylis.dalchyn@gmail.com">meylis.dalchyn@gmail.com</a></li>
+                    <li>Telegram: <a href="https://t.me/meilissiliem" target="_blank">@meilissiliem</a></li>
+                    <li>Instagram: <a href="https://www.instagram.com/siliemmeilis/" target="_blank">@siliemmeilis</a></li>
+                    <li>WhatsApp: <a href="https://wa.me/meilissiliem" target="_blank">chat link</a></li>
+                    <li>ArtStation: <a href="https://www.artstation.com/meilis" target="_blank">profile link</a></li>
+                </ul>
             </div>
         </div>
     </div>
@@ -582,34 +609,41 @@
         </div>
     </footer>
 
-    <!-- Скрипт управления занавесом (Контакты + Логотип) -->
+    <!-- Скрипт управления занавесами -->
     <script>
         const logoTrigger = document.getElementById('logo-trigger');
+        const logoOverlay = document.getElementById('logo-overlay');
+        const logoPanel = logoOverlay.querySelector('.left-panel');
+        const logoClose = logoOverlay.querySelector('.logo-close');
+
         const navContact = document.getElementById('nav-contact');
         const contactOverlay = document.getElementById('contact-overlay');
-        const contactPanel = document.querySelector('.contact-panel');
-        const closeModal = document.getElementById('close-modal');
-        
-        const panelLogoContent = document.getElementById('panel-logo-content');
-        const panelContactContent = document.getElementById('panel-contact-content');
+        const contactPanel = contactOverlay.querySelector('.right-panel');
+        const contactClose = contactOverlay.querySelector('.contact-close');
 
-        // Открытие по клику на Логотип
+        // Открытие левого занавеса (логотип)
         logoTrigger.addEventListener('click', (e) => {
             e.preventDefault();
-            panelLogoContent.style.display = 'block';
-            panelContactContent.style.display = 'none';
-            contactOverlay.classList.add('active');
+            logoOverlay.classList.add('active');
         });
 
-        // Открытие по клику на Контакты
+        logoClose.addEventListener('click', () => {
+            logoOverlay.classList.remove('active');
+        });
+
+        logoOverlay.addEventListener('click', (e) => {
+            if (!logoPanel.contains(e.target)) {
+                logoOverlay.classList.remove('active');
+            }
+        });
+
+        // Открытие правого занавеса (контакты)
         navContact.addEventListener('click', (e) => {
             e.preventDefault();
-            panelLogoContent.style.display = 'none';
-            panelContactContent.style.display = 'block';
             contactOverlay.classList.add('active');
         });
 
-        closeModal.addEventListener('click', () => {
+        contactClose.addEventListener('click', () => {
             contactOverlay.classList.remove('active');
         });
 
