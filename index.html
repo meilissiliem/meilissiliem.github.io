@@ -6,6 +6,8 @@
     <title>MEILIS 3D Artist</title>
     <!-- Иконка во вкладке браузера (загрузите favicon.png в репозиторий) -->
     <link rel="icon" href="favicon.png" type="image/png">
+    <!-- Подключение FontAwesome для иконок соцсетей в футере -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0b0d10;
@@ -293,7 +295,7 @@
             text-transform: uppercase;
         }
 
-        /* Занавес контактов: полупрозрачный, выезжает справа, текст сдвинут влево */
+        /* Занавес контактов */
         .contact-overlay {
             position: fixed;
             top: 0;
@@ -340,7 +342,7 @@
         .contact-content {
             width: 100%;
             max-width: 450px;
-            text-align: left; /* Текст сдвинут налево */
+            text-align: left;
         }
 
         .contact-content h2 {
@@ -378,7 +380,6 @@
             text-decoration: underline;
         }
 
-        /* Кнопка закрытия закреплена в правом верхнем углу панели */
         .close-btn {
             position: absolute;
             top: 25px;
@@ -396,12 +397,33 @@
             color: #fff;
         }
 
+        /* Footer со стилями для иконок соцсетей */
         footer {
             border-top: 1px solid var(--border-color);
             padding: 40px;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
             color: var(--text-dim);
             font-size: 0.85rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: var(--text-dim);
+            font-size: 1.25rem;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 900px) {
@@ -419,6 +441,12 @@
             header, .hero, section:not(.hero):not(#about) {
                 padding-left: 20px;
                 padding-right: 20px;
+            }
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                padding: 30px 20px;
             }
             nav { display: none; }
         }
@@ -503,9 +531,14 @@
 
     <footer>
         <p>&copy; 2026 MEILIS. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="mailto:your_email@example.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://artstation.com" target="_blank" title="ArtStation"><i class="fa-brands fa-artstation"></i></a>
+            <a href="https://t.me/your_username" target="_blank" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
     </footer>
 
-    <!-- Скрипт управления занавесом и закрытия по клику вне панели -->
+    <!-- Скрипт управления занавесом -->
     <script>
         const navContact = document.getElementById('nav-contact');
         const contactOverlay = document.getElementById('contact-overlay');
@@ -521,7 +554,6 @@
             contactOverlay.classList.remove('active');
         });
 
-        // Закрытие при клике по фону (вне самой панели)
         contactOverlay.addEventListener('click', (e) => {
             if (!contactPanel.contains(e.target)) {
                 contactOverlay.classList.remove('active');
