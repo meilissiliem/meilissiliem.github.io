@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meilis 3D Artist</title>
+    <title>MEILIS 3D Artist</title>
     <!-- Иконка во вкладке браузера (загрузите favicon.png в репозиторий) -->
     <link rel="icon" href="favicon.png" type="image/png">
     <!-- Подключение FontAwesome для иконок соцсетей в футере -->
@@ -95,7 +95,7 @@
             justify-content: center;
             align-items: flex-start;
             padding: 100px 60px 40px;
-            background-image: url('main.png');
+            background-image: url('main.webp'); /* Обновлено имя файла фона */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -203,7 +203,7 @@
             line-height: 1.8;
         }
 
-        /* Место под рендер справа */
+        /* Картинка справа */
         .about-media {
             width: 100%;
             min-height: 280px;
@@ -213,7 +213,6 @@
             align-items: center;
             justify-content: center;
             background-color: rgba(11, 13, 16, 0.5);
-            border: 1px dashed var(--border-color);
         }
 
         .about-media img {
@@ -457,14 +456,13 @@
                 text-align: center;
                 padding: 30px 20px;
             }
-            /* Скрываем текстовые пункты на мобильном, кроме кнопки контактов */
             nav a {
                 display: none;
             }
             nav a#nav-contact {
                 display: inline-block;
                 margin-left: 0;
-                margin-right: 15px; /* Сдвигаем кнопку левее от правого края */
+                margin-right: 15px;
                 color: var(--accent-color);
                 font-weight: 700;
             }
@@ -518,7 +516,7 @@
                 <p>Я независимый 3D-художник, специализирующийся на Hard-Surface моделировании. Мой подход объединяет инженерную логику и художественную выразительность. Я помогаю игровым студиям и разработчикам воплощать сложные технические концепты, детализированный реквизит и функциональные элементы окружения, обеспечивая полный цикл производства: от первой фаски до экспорта финальных текстур.</p>
             </div>
             <div class="about-media">
-                <img src="https://via.placeholder.com/800x450/13171f/00e5ff?text=Your+Render+Here" alt="Render Showcase">
+                <img src="about.webp" alt="About Showcase"> <!-- Подключен файл about.webp -->
             </div>
         </div>
     </section>
