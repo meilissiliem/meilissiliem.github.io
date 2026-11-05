@@ -6,7 +6,7 @@
     <title>MEILIS 3D Artist</title>
     <!-- Иконка во вкладке браузера (загрузите favicon.png в репозиторий) -->
     <link rel="icon" href="favicon.png" type="image/png">
-    <!-- Подключение FontAwesome для иконок соцсетей и цитаты -->
+    <!-- Подключение FontAwesome для иконок соцсетей -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -106,7 +106,7 @@
             justify-content: center;
             align-items: flex-start;
             padding: 100px 60px 40px;
-            background-image: url('main.webp');
+            background-image: url('main.webp');[cite: 1]
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -326,7 +326,7 @@
             visibility: visible;
         }
 
-        /* Левая панель (для логотипа / фразы) */
+        /* Левая панель (теперь шириной ровно 50% — симметрично правой) */
         .left-panel {
             position: absolute;
             top: 0;
@@ -380,20 +380,13 @@
             text-align: left;
         }
 
-        /* Белый цвет букв, убранные кавычки, иконка цитаты после точки */
+        /* Белый текст фразы в кавычках */
         .quote-text {
             font-size: 3rem;
-            color: #ffffff; /* Цвет букв белый */
+            color: #ffffff;
             font-style: italic;
             line-height: 1.3;
             text-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-        }
-
-        .quote-icon {
-            font-size: 2rem;
-            color: var(--accent-color); /* Иконка цитаты выделена фирменным акцентом */
-            margin-left: 12px;
-            vertical-align: middle;
         }
 
         .right-panel h2 {
@@ -540,7 +533,7 @@
         <div class="left-panel">
             <button class="close-btn logo-close">&times;</button>
             <div class="panel-content">
-                <p class="quote-text">Чтобы делать классику, нужна свобода.<i class="fa-solid fa-quote-right quote-icon"></i></p>
+                <p class="quote-text">«Чтобы делать классику, нужна свобода.»</p>
             </div>
         </div>
     </div>
@@ -578,7 +571,7 @@
                 <p>Я независимый 3D-художник, специализирующийся на Hard-Surface моделировании. Мой подход объединяет инженерную логику и художественную выразительность. Я помогаю игровым студиям и разработчикам воплощать сложные технические концепты, детализированный реквизит и функциональные элементы окружения, обеспечивая полный цикл производства: от первой фаски до экспорта финальных текстур.</p>
             </div>
             <div class="about-media">
-                <img src="about.webp" alt="About Showcase">
+                <img src="about.webp" alt="About Showcase">[cite: 1]
             </div>
         </div>
     </section>
