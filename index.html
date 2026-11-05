@@ -85,7 +85,7 @@
             color: var(--accent-color);
         }
 
-        /* Hero Section */
+        /* Hero Section (Исправлено растяжение фона) */
         .hero {
             position: relative;
             width: 100%;
@@ -96,7 +96,7 @@
             align-items: flex-start;
             padding: 100px 60px 40px;
             background-image: url('main.png');
-            background-size: 100% 100%;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             border-bottom: 1px solid var(--border-color);
@@ -444,6 +444,11 @@
             header, .hero, section:not(.hero):not(#about) {
                 padding-left: 20px;
                 padding-right: 20px;
+            }
+            .hero {
+                aspect-ratio: auto;
+                min-height: 85vh;
+                padding-top: 120px;
             }
             footer {
                 flex-direction: column;
